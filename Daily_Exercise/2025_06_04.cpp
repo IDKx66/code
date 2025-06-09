@@ -36,5 +36,7 @@ int main()
     {
         cout << nums[i] << endl;
     }
+    cout << "中文 " << returnSize << endl;
+    cout << "English " << returnSize << endl;
     return 0;
 }

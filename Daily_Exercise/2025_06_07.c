@@ -1,6 +1,7 @@
 //计算后缀表达式的值
 #include <stdio.h>
 #include <stdlib.h>
+#include <c++/ostream>
 
 #define MAXSIZE 100
 
@@ -169,6 +170,6 @@ int main()
     Stack *s = initStack();
 
     eval(s);
-
+    cout << "one test" << endl;
     return 0;
 }

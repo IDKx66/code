@@ -134,6 +134,16 @@ void iterPreOrder(BiTree T){
     }
 }
 
+//最大深度
+int maxDepth(BiTree T){
+    if(T == nullptr) return 0;
+    else{
+        int l = maxDepth(T->lchild);
+        int r = maxDepth(T->rchild);
+        return l > r ? l + 1 : r + 1;
+    }
+}
+
 
 //复制二叉树
 void copyTree(BiTree T, BiTree &newT){
@@ -185,6 +195,8 @@ int main(){
     cout << "非递归前序遍历：";
     iterPreOrder(root);
     cout << endl;
+
+    cout << "最大深度：" << maxDepth(root) << endl;
 
     // cout << "中序遍历非递归：";
     // inOrderNonRecursive(root);

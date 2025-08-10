@@ -112,14 +112,35 @@
 //     return 0;
 // }
 
-// #define定义标识符常量
+// #define定义标识符常量(define不是关键字，是预处理指令)
 // #define MAX 100
 
 // #define定义宏(有参数)
-#define ADD(x, y) ((x) + (y))
+// #define ADD(x, y) ((x) + (y))
+
+// int main()
+// {
+//     printf("%d\n", ADD(21, 22));
+//     printf("%x\n", 255);//16进制
+//     return 0;
+// }
 
 int main()
 {
-    printf("%d\n", ADD(21, 22));
+    // int a = 10;
+    // printf("%p\n", &a);
+    // int *p = &a;
+
+    // printf("%zu\n", sizeof(char *));
+    // printf("%zu\n", sizeof(short *));
+    // printf("%zu\n", sizeof(int *));
+    // printf("%zu\n", sizeof(double *));
+    // printf("%zu\n", sizeof(float *));
+
+    int *p1, p2, p3;
+    printf("%zu\n", sizeof(p1));
+    printf("%zu\n", sizeof(p2));
+    printf("%zu\n", sizeof(p3));
+    
     return 0;
 }

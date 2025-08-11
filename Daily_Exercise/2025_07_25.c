@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <time.h>
+#include <windows.h>
 // #include <iostream>
 
 // // 枚举类型
@@ -147,6 +150,7 @@
 
 // 结构体
 // 学生
+// #include <windows.h>
 //  struct Stu
 //  {   //成员
 //      char name[20];
@@ -165,6 +169,7 @@
 // }
 // int main()
 // {
+//     SetConsoleCP(65001);
 //     struct Stu s = {"张三", 18, "男", "123456789"};
 
 //     //结构体对象.成员名
@@ -175,6 +180,16 @@
 //     scanf("%s", s.name);//为什么这样输入中文却会乱码？？？
 //     print(&s);
 //     return 0;
+// }
+// int main()
+// {
+//     // system("chcp 65001");
+//     char test[100] = "李四";
+//     printf("%s\n", test);
+//     scanf("%s", test);
+//     printf("%s\n", test);
+//     return 0;
+    
 // }
 
 // int main()
@@ -323,6 +338,7 @@
 //             right = mid - 1;
 //         else
 //         {
+
 //             printf("找到了, 下标是%d\n", mid);
 //             break;
 //         }
@@ -364,25 +380,94 @@
 //     return 0;
 // }
 
-int main()
-{
-    int i = 0;
-    // 假设密码是abcdef
-    char password[20] = {0};
-    for (i = 0; i < 3; i++)
-    {
-        printf("请输入密码:");
-        scanf("%s", password);
-        // if (password == "abcdef")###错误###，比较两个字符串是否相等不能用==，得用库函数strcmp
-        //                                                    如果返回值是0，表示两个字符串相等
-        if (strcmp(password, "abcdef") == 0)
-        {
-            printf("登陆成功\n");
-            break;
-        }
-        else printf("密码错误\n");
-    }
+// int main()
+// {
+//     int i = 0;
+//     // 假设密码是abcdef
+//     char password[20] = {0};
+//     for (i = 0; i < 3; i++)
+//     {
+//         printf("请输入密码:");
+//         scanf("%s", password);
+//         // if (password == "abcdef")###错误###，比较两个字符串是否相等不能用==，得用库函数strcmp
+//         //                                                    如果返回值是0，表示两个字符串相等
+//         if (strcmp(password, "abcdef") == 0)
+//         {
+//             printf("登陆成功\n");
+//             break;
+//         }
+//         else printf("密码错误\n");
+//     }
 
-    if (3 == i)
-        printf("三次密码均输入错误,退出程序\n");
-}
+//     if (3 == i)
+//         printf("三次密码均输入错误,退出程序\n");
+// }
+
+// void menu()
+// {
+//     printf("**************************\n");
+//     printf("********  1.paly  ********\n");
+//     printf("********  0.exit  ********\n");
+//     printf("**************************\n");
+// }
+
+// void game()
+// {   
+//     int guess = 0;
+
+//     //1.生成随机数(0~RAND_MAX(32767))
+//     int ret = rand() % 100 + 1;
+//     // printf("%d\n", ret);
+//     printf("请猜数字:>");
+//     scanf("%d", &guess);
+
+//     while (1)
+//     {
+//         if (guess > ret) 
+//         {
+//             printf("大了\n");
+//             printf("请猜数字:>");
+//             scanf("%d", &guess);
+//         }
+//         else if (guess < ret) 
+//         {
+//             printf("小了\n");
+//             printf("请猜数字:>");
+//             scanf("%d", &guess);
+//         }
+//         else
+//         {
+//             printf("恭喜你猜对了！\n");
+//             break;
+//         }
+//     }
+// }
+
+// int main()
+// {
+//     srand((unsigned int)time(NULL));
+
+//     int input = 0;
+//     do
+//     {
+//         menu();
+//         printf("请选择:>");
+//         scanf("%d", &input);
+//         switch (input)
+//         {
+//         case 1:
+//         game(); 
+//             printf("猜数字\n");
+//             break;
+//         case 0:
+//             printf("退出游戏\n");
+//             break;
+//         default:
+//             printf("选择错误, 重新选择\n");
+//             break;
+//         }
+//     } while (input);
+
+//     return 0;
+// }
+

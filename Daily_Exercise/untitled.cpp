@@ -1,12 +1,10 @@
-#include <iostream>
-#include <string>
-using namespace std;
+#include <stdio.h>
 
 int main()
 {
-    string name = "张三";
-    cout << name << endl;
-    cin >> name;
-    cout << name << endl;
+    char name[20] = "张三";
+    printf("%s\n", name);
+    scanf("%s", name);
+    printf("%s\n", name);
     return 0;
 }

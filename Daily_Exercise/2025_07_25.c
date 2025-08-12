@@ -403,71 +403,123 @@
 //         printf("三次密码均输入错误,退出程序\n");
 // }
 
-void menu()
+// void menu()
+// {
+//     printf("**************************\n");
+//     printf("********  1.paly  ********\n");
+//     printf("********  0.exit  ********\n");
+//     printf("**************************\n");
+// }
+
+// void game()
+// {   
+//     int guess = 0;
+
+//     //1.生成随机数(0~RAND_MAX(32767))
+//     int ret = rand() % 100 + 1;
+//     // printf("%d\n", ret);
+//     printf("请猜数字:>");
+//     scanf("%d", &guess);
+
+//     while (1)
+//     {
+//         if (guess > ret) 
+//         {
+//             printf("大了\n");
+//             printf("请猜数字:>");
+//             scanf("%d", &guess);
+//         }
+//         else if (guess < ret) 
+//         {
+//             printf("小了\n");
+//             printf("请猜数字:>");
+//             scanf("%d", &guess);
+//         }
+//         else
+//         {
+//             printf("恭喜你猜对了！\n");
+//             break;
+//         }
+//     }
+// }
+
+// int main()
+// {
+//     srand((unsigned int)time(NULL));
+
+//     int input = 0;
+//     do
+//     {
+//         menu();
+//         printf("请选择:>");
+//         scanf("%d", &input);
+//         switch (input)
+//         {
+//         case 1:
+//         game(); 
+//             printf("猜数字\n");
+//             break;
+//         case 0:
+//             printf("退出游戏\n");
+//             break;
+//         default:
+//             printf("选择错误, 重新选择\n");
+//             break;
+//         }
+//     } while (input);
+
+//     return 0;
+// }
+
+// int main()
+// {
+//     char input[20] = {0};
+//     system("shutdown -s -t 120");
+// again:
+//     printf("请注意,你的电脑将在60s内关机。输入我是猪,就取消关机\n");
+//     scanf("%s", input);
+//     if (strcmp(input, "我是猪") == 0)
+//     {
+//         system("shutdown -a");
+//     }
+//     else
+//     {
+//         goto again;
+//     }
+
+//     return 0;
+// }
+
+int test(int arr[])
 {
-    printf("**************************\n");
-    printf("********  1.paly  ********\n");
-    printf("********  0.exit  ********\n");
-    printf("**************************\n");
+    int sz = sizeof(arr) / sizeof(arr[0]);
+    return sz;
 }
-
-void game()
-{   
-    int guess = 0;
-
-    //1.生成随机数(0~RAND_MAX(32767))
-    int ret = rand() % 100 + 1;
-    // printf("%d\n", ret);
-    printf("请猜数字:>");
-    scanf("%d", &guess);
-
-    while (1)
-    {
-        if (guess > ret) 
-        {
-            printf("大了\n");
-            printf("请猜数字:>");
-            scanf("%d", &guess);
-        }
-        else if (guess < ret) 
-        {
-            printf("小了\n");
-            printf("请猜数字:>");
-            scanf("%d", &guess);
-        }
-        else
-        {
-            printf("恭喜你猜对了！\n");
-            break;
-        }
-    }
-}
+//这个错误提示
+//'sizeof' on array function parameter 'arr' will return size of 'int*' 
+//是因为在 函数参数中使用 sizeof(arr) 时，数组会被隐式转换为指针（即 “数组退
+//化”），导致 sizeof 计算的是指针的大小，而不是数组实际元素个数。
 
 int main()
 {
-    srand((unsigned int)time(NULL));
+    // char arr1[20] = {0};
+    // char arr2[20] = "hello, world";
+    // strcpy(arr1, arr2);
+    
+    // printf("%s\n", arr1);
 
-    int input = 0;
-    do
-    {
-        menu();
-        printf("请选择:>");
-        scanf("%d", &input);
-        switch (input)
-        {
-        case 1:
-        game(); 
-            printf("猜数字\n");
-            break;
-        case 0:
-            printf("退出游戏\n");
-            break;
-        default:
-            printf("选择错误, 重新选择\n");
-            break;
-        }
-    } while (input);
+    // char arr[20] = "hello world";
+    // memset(arr, 'x', 6);
+    // //memset(arr + 1, 'x', 6);
+    // printf("%s\n", arr);
+
+    //值传递址传递
+    //当实参传递给形参时，形参是实参的一份临时拷贝
+    //对形参的修改不会影响实参
+
+    int arr[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    int sz = test(arr);
+    printf("%d\n", sz);
 
     return 0;
 }
-

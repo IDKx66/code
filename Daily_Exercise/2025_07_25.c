@@ -189,7 +189,7 @@
 //     scanf("%s", test);
 //     printf("%s\n", test);
 //     return 0;
-    
+
 // }
 
 // int main()
@@ -412,7 +412,7 @@
 // }
 
 // void game()
-// {   
+// {
 //     int guess = 0;
 
 //     //1.生成随机数(0~RAND_MAX(32767))
@@ -423,13 +423,13 @@
 
 //     while (1)
 //     {
-//         if (guess > ret) 
+//         if (guess > ret)
 //         {
 //             printf("大了\n");
 //             printf("请猜数字:>");
 //             scanf("%d", &guess);
 //         }
-//         else if (guess < ret) 
+//         else if (guess < ret)
 //         {
 //             printf("小了\n");
 //             printf("请猜数字:>");
@@ -456,7 +456,7 @@
 //         switch (input)
 //         {
 //         case 1:
-//         game(); 
+//         game();
 //             printf("猜数字\n");
 //             break;
 //         case 0:
@@ -490,36 +490,131 @@
 //     return 0;
 // }
 
-int test(int arr[])
+// 形参arr看似是数组，本质是指针变量
+//  int test(int arr[])
+//  {
+//      int sz = sizeof(arr) / sizeof(arr[0]);
+//      return sz;
+//  }
+// 这个错误提示
+//'sizeof' on array function parameter 'arr' will return size of 'int*'
+// 是因为在 函数参数中使用 sizeof(arr) 时，数组会被隐式转换为指针（即 “数组退
+// 化”），导致 sizeof 计算的是指针的大小，而不是数组实际元素个数。
+
+// int main()
+// {
+// char arr1[20] = {0};
+// char arr2[20] = "hello, world";
+// strcpy(arr1, arr2);
+
+// printf("%s\n", arr1);
+
+// char arr[20] = "hello world";
+// memset(arr, 'x', 6);
+// //memset(arr + 1, 'x', 6);
+// printf("%s\n", arr);
+
+// 值传递址传递
+// 当实参传递给形参时，形参是实参的一份临时拷贝
+// 对形参的修改不会影响实参
+
+//     int arr[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+//     int sz = test(arr);
+//     printf("%d\n", sz);
+
+//     printf("%d\n", sizeof(bool));
+
+//     return 0;
+// }
+
+// void Add(int *p)
+// {
+//     (*p)++;
+// }
+
+// int main()
+// {
+//     int num = 0;
+//     Add(&num);
+//     printf("%d\n", num);
+//     Add(&num);
+//     printf("%d\n", num);
+
+//     return 0;
+// }
+
+// 函数不写返回值时，默认返回类型是int
+//  Add(int x, int y)
+//  {
+//      return x + y;
+//  }
+// #include "add.h"
+// int main()
+// {
+//     //链式访问(把一个函数的返回值作为另一个函数的参数)
+//     printf("%d\n", strlen("abcdef)"));
+
+//     //printf的返回值是字符的个数
+//     printf("%d", printf("%d", printf("%d", 43)));//打印出4321
+
+//     printf("\n%d\n", Add(10, 20));
+//     return 0;
+// }
+
+// main函数有三个参数
+// int main(int argc, char *argv[], char *envp[])
+// {
+//     return 0;
+// }
+
+// 递归
+//  void print(unsigned int n)//从高到低依次打印
+//  {
+//      if (n > 9)
+//      {
+//          print(n / 10);
+//      }
+
+//     printf("%u ", n % 10);
+// }
+
+// int main()
+// {
+//     int num = 1000;
+//     print(num);
+
+//     return 0;
+// }
+
+// 非递归与递归写求字符串长度
+// int my_strlen(char *str)
+// {
+//     int count = 0;
+//     while (*str != '\0')
+//     {
+//         count++;
+//         str++;
+//     }
+//     return count;
+// }
+
+int my_strlen(char *str)
 {
-    int sz = sizeof(arr) / sizeof(arr[0]);
-    return sz;
+    if (*str != '\0')
+    {
+        return 1 + my_strlen(str + 1);
+    }
+    else
+    {
+        return 0;
+    }
 }
-//这个错误提示
-//'sizeof' on array function parameter 'arr' will return size of 'int*' 
-//是因为在 函数参数中使用 sizeof(arr) 时，数组会被隐式转换为指针（即 “数组退
-//化”），导致 sizeof 计算的是指针的大小，而不是数组实际元素个数。
 
 int main()
 {
-    // char arr1[20] = {0};
-    // char arr2[20] = "hello, world";
-    // strcpy(arr1, arr2);
-    
-    // printf("%s\n", arr1);
-
-    // char arr[20] = "hello world";
-    // memset(arr, 'x', 6);
-    // //memset(arr + 1, 'x', 6);
-    // printf("%s\n", arr);
-
-    //值传递址传递
-    //当实参传递给形参时，形参是实参的一份临时拷贝
-    //对形参的修改不会影响实参
-
-    int arr[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-    int sz = test(arr);
-    printf("%d\n", sz);
+    char arr[] = "abc d ";
+    int len = my_strlen(arr);
+    printf("%d\n", len);
 
     return 0;
 }

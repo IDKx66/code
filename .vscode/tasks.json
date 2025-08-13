@@ -9,6 +9,7 @@
                 "-g",
                 "${file}",
                 "-o",
+                "${workspaceFolder}/Daily_Exercise/add.c",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],
             "options": {

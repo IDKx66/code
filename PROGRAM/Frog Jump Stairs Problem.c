@@ -1,5 +1,6 @@
-// 青蛙跳台阶
+// 青蛙跳台阶问题
 #include <stdio.h>
+// #include <string.h>
 
 int book[100];
 
@@ -21,6 +22,7 @@ int main()
     {
         book[i] = -1;
     }
+    // memset(book, -1, sizeof(book)); //(需要string.h头文件)
 
     book[0] = 0;
     book[1] = 1;

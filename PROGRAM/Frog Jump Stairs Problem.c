@@ -22,8 +22,8 @@ int main()
     {
         book[i] = -1;
     }
-    // memset(book, -1, sizeof(book)); //(需要string.h头文件)
-
+    // memset(book, -1, sizeof(book) / sizeof(book[0])); //(需要string.h头文件)
+    
     book[0] = 0;
     book[1] = 1;
     book[2] = 2;

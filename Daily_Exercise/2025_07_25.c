@@ -220,7 +220,7 @@
 // case 7:
 //     printf("星期日\n");
 //     break;
-// default:
+// default:              //switch语句中的default子句可以放在任意位置
 //     printf("输入有误\n");
 //     break;
 // }
@@ -548,16 +548,18 @@
 //  {
 //      return x + y;
 //  }
+
 // #include "add.h"
 // int main()
 // {
-//     //链式访问(把一个函数的返回值作为另一个函数的参数)
-//     printf("%d\n", strlen("abcdef)"));
+// 链式访问(把一个函数的返回值作为另一个函数的参数)
+// printf("%d\n", strlen("abcdef)"));
 
-//     //printf的返回值是字符的个数
+// printf的返回值是字符的个数
 //     printf("%d", printf("%d", printf("%d", 43)));//打印出4321
 
 //     printf("\n%d\n", Add(10, 20));
+//     printf("69\n");
 //     return 0;
 // }
 
@@ -598,23 +600,249 @@
 //     return count;
 // }
 
-int my_strlen(char *str)
-{
-    if (*str != '\0')
-    {
-        return 1 + my_strlen(str + 1);
-    }
-    else
-    {
-        return 0;
-    }
-}
+// int my_strlen(char *str)
+// {
+//     if (*str != '\0')
+//     {
+//         return 1 + my_strlen(str + 1);
+//     }
+//     else
+//     {
+//         return 0;
+//     }
+// }
 
+// int main()
+// {
+//     char arr[] = "abc d ][]";
+//     int len = my_strlen(arr);
+//     printf("%d\n", len);
+
+//     return 0;
+// }
+
+// 斐波那契数列(迭代)
+// int fib(int n)
+// {
+//     int a = 1;
+//     int b = 1;
+//     int c = 1;
+
+//     while (n > 2)
+//     {
+//         c = a + b;
+//         a = b;
+//         b = c;
+//         n--;
+//     }
+
+//     return c;
+// }
+// int main()
+// {
+//     int n = 0;
+//     while (1)
+//     {
+//         scanf("%d", &n);
+//         if (0 == n)
+//             break;
+//         printf("%d\n", fib(n));
+//     }
+//     return 0;
+// }
+
+// 辗转相除法求最大公约数(递归版本)
+// int gcd(int a, int b)
+// {
+//     // 如果b为0，则最大公约数是a
+//     if (b == 0)
+//         return a;
+//     // 否则，递归调用gcd(b, a % b)
+//     return gcd(b, a % b);
+// }
+
+// 辗转相除法求最大公约数（迭代版本）
+// int gcd(int a, int b)
+// {
+//     int temp;
+//     while (b != 0)
+//     {
+//         temp = a % b;
+//         a = b;
+//         b = temp;
+//     }
+//     return a;
+// }
+
+// int main()
+// {
+//     int n = gcd(12,15);
+//     printf("%d\n", n);
+//     return 0;
+// }
+
+// 计算1/1-1/2+1/3-···+1/99-1/100
+//  int main()
+//  {
+//      int i = 0;
+//      double sum = 0.0;
+//      int flag = 1;
+//      for (i = 1; i <= 100; i++)
+//      {
+//          sum += flag * 1.0 / i;
+//          flag = -flag;
+//      }
+//      printf("%lf\n", sum);
+//  }
+
+// 打印九九乘法表
+//  int main()
+//  {
+//      int i = 0;
+//      int j = 0;
+//      for (i = 1; i <= 9; i++)
+//      {
+//          for (j = 1; j <= i; j++)
+//          {
+//              printf("%d*%d=%d\t", j, i, i * j);
+//          }
+//          printf("\n");
+//      }
+//      return 0;
+//  }
+
+// int main()
+// {
+// //     //下面的代码只能在支持C99标准的编译器上编译
+// //     int n = 0;
+// //     scanf("%d", &n);
+// //     int arr[n]; //这种数组不能初始化
+
+// //     //在C99标准之前，数组的大小必须是常量或者常量表达式
+// //     //在C99标准之后，数组的大小可以是变量，为了支持变长数组
+//     return 0;
+// }
+
+// 二维数组(可以理解为：一维数组的是数组)
+//  int main()
+//  {
+// 1 2 3 4
+// 2 3 4 5
+// 3 4 5 6
+// int arr[3][4] = {1, 2, 3, 4, 2, 3, 4, 5, 3, 4, 5, 6};
+
+// int arr[3][4] = {{1, 2}, {3, 4}, {5, 6}};
+
+// int arr[][4] = {{1, 2, 3, 4}, {2, 3}};
+// int arr[][4] = {1, 2, 3, 4, 5, 6};
+// 只能省略行不能省略列
+
+// int arr[3][4] = {1, 2, 3, 4, 2, 3, 4, 5, 3, 4, 5, 6};
+
+// for (int i = 0; i < 3; i++)
+// {
+//     for (int j = 0; j < 4; j++)
+//     {
+//         printf("%d ", arr[i][j]);
+//     }
+//     printf("\n");
+// }
+
+// for (int i = 0; i < 3; i++)
+// {
+//     for (int j = 0; j < 4; j++)
+//     {
+//         printf("&arr[%d][%d] = %p\n", i, j, &arr[i][j]);
+//     }
+// }
+
+// printf("%d", arr[3][4]);
+// 越界但是不一定报错，需要自己检查
+//     return 0;
+// }
+
+// 二维数组的越界
+//  int main()
+//  {
+//      int arr[3][4] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+//      for(int i = 0; i < 3; i++)
+//      {
+//          for(int j = 0; j <= 4;j++)
+//          {
+//              printf("%d ", arr[i][j]);
+//          }
+//      }
+//      return 0;
+//  }
+
+// 数组传参的时候，形参有2种写法
+// 1.数组
+// 2.指针
+// void bubble_sort(int arr[], int sz)
+// void bubble_sort(int *arr, int sz)
+// {
+// 冒泡排序
+//     int i = 0;
+//     int j = 0;
+//     for (i = 0; i < sz - 1; i++)
+//     {
+//         for (j = 0; j < sz - i - 1; j++)
+//         {
+//             if (arr[j] > arr[j + 1])
+//             {
+//                 int temp = arr[j];
+//                 arr[j] = arr[j + 1];
+//                 arr[j + 1] = temp;
+//             }
+//         }
+//     }
+// }
+
+// int main()
+// {
+//     int arr[] = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+//     int sz = sizeof(arr) / sizeof(arr[0]);
+//     bubble_sort(arr, sz);
+//     for(int i = 0; i < sz; i++)
+//     {
+//         printf("%d ", arr[i]);
+//     }
+
+//     return 0;
+// }
+
+// 数组名确实能表示首元素的地址
+// 但是有2个例外：
+// 1.sizeof(数组名)，这里的数组名表示整个数组，计算的是整个数组
+//   的大小，单位是字节
+// 2.&数组名，这里的数组名表示整个数组，取出的是整个数组的地址
+// int main()
+// {
+//     int arr[10] = {0};
+//     printf("%p\n", arr);
+//     printf("%p\n", arr + 1);
+//     printf("---------------\n");
+//     printf("%p\n", &arr[0]);
+//     printf("%p\n", &arr[0] + 1);
+//     printf("---------------\n");
+//     printf("%p\n", &arr);
+//     printf("%p\n", &arr + 1);
+
+//     return 0;
+// }
+
+// 二维数组的数组名的理解
 int main()
 {
-    char arr[] = "abc d ";
-    int len = my_strlen(arr);
-    printf("%d\n", len);
+    int arr[3][4] = {0};
 
-    return 0;
+    printf("%d\n", sizeof(arr) / sizeof(arr[0]));       // 行的大小
+    printf("%d\n", sizeof(arr[0]) / sizeof(arr[0][0])); // 列的大小
+
+    // int sz = sizeof(arr);
+    // printf("%d\n", sz);
+
+    printf("%p\n", arr);
+    printf("%p\n", arr + 1);
+    
 }

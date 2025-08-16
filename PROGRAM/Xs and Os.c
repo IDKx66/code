@@ -3,9 +3,20 @@
 #include <stdlib.h>
 #include <time.h>
 #include <stdbool.h>
+#include <string.h>
 
 #define ROW 3 // 行
 #define COL 3 // 列
+
+void menu();                                               // 打印菜单
+void initBoard(char board[ROW][COL], int row, int col);    // 初始化棋盘
+void displayBoard(char board[ROW][COL], int row, int col); // 打印棋盘
+void playerMove(char board[ROW][COL], int row, int col);   // 玩家下棋
+void computerMove(char board[ROW][COL], int row, int col); // 电脑下棋
+bool isFull(char board[ROW][COL], int row, int col);       // 判断棋盘是否下满
+char isWin(char board[ROW][COL], int row, int col);        // 判断是否有一方获胜
+void game();                                               // 游戏主函数
+void printGameResult(char result);                         // 打印游戏结果
 
 // 打印菜单
 void menu()
@@ -19,13 +30,15 @@ void menu()
 // 初始化棋盘
 void initBoard(char board[ROW][COL], int row, int col)
 {
-    for (int i = 0; i < row; i++)
-    {
-        for (int j = 0; j < col; j++)
-        {
-            board[i][j] = ' ';
-        }
-    }
+    // for (int i = 0; i < row; i++)
+    // {
+    //     for (int j = 0; j < col; j++)
+    //     {
+    //         board[i][j] = ' ';
+    //     }
+    // }
+
+    memset(board, ' ', row * col * sizeof(char));
 }
 
 // 打印棋盘
@@ -109,7 +122,7 @@ void computerMove(char board[ROW][COL], int row, int col)
     }
 }
 
-// 判断棋盘是否已满
+// 判断棋盘是否下满
 bool isFull(char board[ROW][COL], int row, int col)
 {
     for (int i = 0; i < row; i++)
@@ -125,51 +138,107 @@ bool isFull(char board[ROW][COL], int row, int col)
     return true;
 }
 
-// 判断输赢（该函数只能用于3 * 3的棋盘）
+// 判断是否有一方获胜（优化算法，不仅限于3*3）
 //*玩家赢  #电脑赢  Q平局  C继续
 char isWin(char board[ROW][COL], int row, int col)
-{   
-    // 行
+{
+    // 检查行
     for (int i = 0; i < row; i++)
     {
-        if (board[i][0] == board[i][1] && board[i][1] == board[i][2] && board[i][0] != ' ')
+        bool win = true;
+
+        for (int j = 1; j < col; j++)
+        {
+            if (board[i][0] != board[i][j] || board[i][0] == ' ')
+            {
+                win = false;
+                break;
+            }
+        }
+
+        if (win)
         {
             return board[i][0];
         }
     }
 
-    // 列
+    // 检查列
     for (int j = 0; j < col; j++)
     {
-        if (board[0][j] == board[1][j] && board[1][j] == board[2][j] && board[0][j] != ' ')
+        bool win = true;
+
+        for (int i = 1; i < row; i++)
+        {
+            if (board[0][j] != board[i][j] || board[0][j] == ' ')
+            {
+                win = false;
+                break;
+            }
+        }
+
+        if (win)
         {
             return board[0][j];
         }
     }
 
-    // 主对角线
-    if (board[0][0] == board[1][1] && board[1][1] == board[2][2] && board[0][0] != ' ')
+    // 检查主对角线
+    bool diag1 = true;
+
+    for (int i = 1; i < row; i++)
+    {
+        if (board[0][0] != board[i][i] || board[0][0] == ' ')
+        {
+            diag1 = false;
+            break;
+        }
+    }
+
+    if (diag1)
     {
         return board[0][0];
     }
 
-    // 副对角线
-    if (board[0][2] == board[1][1] && board[1][1] == board[2][0] && board[0][2] != ' ')
-    {
-        return board[1][1];
-    }
+    // 检查副对角线
+    bool diag2 = true;
 
-    if (isFull(board, row, col))
+    for (int i = 1; i < row; i++)
     {
-        return 'Q'; // 平局
+        if (board[0][row - 1] != board[i][row - 1 - i] || board[0][row - 1] == ' ')
+        {
+            diag2 = false;
+            break;
+        }
+    }
+    if (diag2)
+    {
+        return board[0][row - 1];
     }
 
     return 'C'; // 游戏继续
 }
 
+// 打印游戏结果
+void printGameResult(char result)
+{
+    if (result == '*')
+    {
+        printf("恭喜你赢了！🎉\n");
+    }
+    else if (result == '#')
+    {
+        printf("很遗憾，电脑赢了！💻\n");
+    }
+    else
+    {
+        printf("游戏结束，平局！🤝\n");
+    }
+}
+
+// 游戏主函数
 void game()
 {
-    char ret = 0;
+    char result = 0;
 
     // 初始化棋盘
     char board[ROW][COL] = {0};
@@ -181,33 +250,22 @@ void game()
     {
         playerMove(board, ROW, COL);
         displayBoard(board, ROW, COL);
-        ret = isWin(board, ROW, COL);
-        if (ret != 'C')
+        result = isWin(board, ROW, COL);
+        if (result != 'C')
         {
             break;
         }
 
         computerMove(board, ROW, COL);
         displayBoard(board, ROW, COL);
-        ret = isWin(board, ROW, COL);
-        if (ret != 'C')
+        result = isWin(board, ROW, COL);
+        if (result != 'C')
         {
             break;
         }
     }
 
-    if (ret == '*')
-    {
-        printf("恭喜你赢了！🎉\n");
-    }
-    else if (ret == '#')
-    {
-        printf("很遗憾，电脑赢了！💻\n");
-    }
-    else
-    {
-        printf("游戏结束，平局！🤝\n");
-    }
+    printGameResult(result);
 }
 
 int main()

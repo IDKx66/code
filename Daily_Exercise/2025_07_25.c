@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
+#include <math.h>
 #include <windows.h>
 // #include <iostream>
 
@@ -832,17 +833,74 @@
 // }
 
 // 二维数组的数组名的理解
+// int main()
+// {
+//     int arr[3][4] = {0};
+
+//     printf("%d\n", sizeof(arr) / sizeof(arr[0]));       // 行的大小
+//     printf("%d\n", sizeof(arr[0]) / sizeof(arr[0][0])); // 列的大小
+
+// int sz = sizeof(arr);
+// printf("%d\n", sz);
+
+// printf("%p\n", arr);
+// printf("%p\n", arr + 1);
+
+// return 0;
+// }
+
+// 递归逆序字符串
+// void reverse_string1(char *str)
+// {
+//     // char temp = str[0];
+//     char temp = *str;
+
+//     int len = strlen(str);
+
+//     // str[0] = str[len - 1];
+//     // str[len - 1] = '\0';
+//     *str = *(str + len - 1);
+//     *(str + len - 1) = '\0';
+
+//     if (strlen(str + 1) >= 2)
+//     {
+//         reverse_string1(str + 1);
+//     }
+
+//     str[len - 1] = temp;
+// }
+
+// void reverse_string2(char *str, int left, int right)
+// {
+//     char temp = *(str + left);
+//     *(str + left) = *(str + right);
+//     *(str + right) = temp;
+
+//     if (left < right)
+//     {
+//         reverse_string2(str, left + 1, right - 1);
+//     }
+// }
+
+// int main()
+// {
+//     char arr[] = "abcdefgh";//{'a', 'b',..., 'h','\0' }
+//     int sz = strlen(arr) - 1;
+//     printf("%s\n", arr);
+
+//     reverse_string1(arr);
+//     printf("%s\n", arr);
+
+//     reverse_string2(arr, 0, sz);
+//     printf("%s\n", arr);
+
+//     return 0;
+// }
+
 int main()
 {
-    int arr[3][4] = {0};
+    int num = 0;
+    int arr[10] = {0};
 
-    printf("%d\n", sizeof(arr) / sizeof(arr[0]));       // 行的大小
-    printf("%d\n", sizeof(arr[0]) / sizeof(arr[0][0])); // 列的大小
-
-    // int sz = sizeof(arr);
-    // printf("%d\n", sz);
-
-    printf("%p\n", arr);
-    printf("%p\n", arr + 1);
-    
+    return 0;
 }

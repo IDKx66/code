@@ -10,7 +10,21 @@
 #define ROWS ROW + 2
 #define COLS COL + 2
 
-#define EASY_COUNT 10
+#define EASY_COUNT 5
+
+int book[ROWS][COLS]; // 标记数组
+
+// 函数声明
+
+void menu();                                                                   // 打印菜单
+void initBoard(char board[ROWS][COLS], int rows, int cols, char set);          // 初始化数组
+void displayBoard(char board[ROWS][COLS], int row, int col);                   // 打印数组
+void setMine(char mine[ROWS][COLS], int row, int col);                         // 布置雷
+int get_mine_count(char mine[ROWS][COLS], int x, int y);                       // 获取周围雷的数量
+void spreadMine(char mine[ROWS][COLS], char show[ROWS][COLS], int x, int y);   // 展开一片
+void isWin(char show, int row, int col);                                       // 判断是否胜利
+void findMine(char mine[ROWS][COLS], char show[ROWS][COLS], int row, int col); // 排查雷
+void game();                                                                   // 游戏主函数
 
 // 打印菜单
 void menu()
@@ -53,7 +67,7 @@ void displayBoard(char board[ROWS][COLS], int row, int col)
 }
 
 // 布置雷
-void setMine(char board[ROWS][COLS], int row, int col)
+void setMine(char mine[ROWS][COLS], int row, int col)
 {
     int count = EASY_COUNT;
 
@@ -62,24 +76,87 @@ void setMine(char board[ROWS][COLS], int row, int col)
         int x = rand() % row + 1; // 1~row
         int y = rand() % col + 1; // 1~col
 
-        if (board[x][y] == '0')
+        if (mine[x][y] == '0')
         {
-            board[x][y] = '1';
+            mine[x][y] = '1';
         }
     }
 }
 
 // 获取周围雷的数量
-int get_mine_count(char board[ROWS][COLS], int x, int y)
+int get_mine_count(char mine[ROWS][COLS], int x, int y)
 {
-    return board[x - 1][y - 1] +
-           board[x - 1][y] +
-           board[x - 1][y + 1] +
-           board[x][y - 1] +
-           board[x][y + 1] +
-           board[x + 1][y - 1] +
-           board[x + 1][y] +
-           board[x + 1][y + 1] - 8 * '0';
+    return mine[x - 1][y - 1] +
+           mine[x - 1][y] +
+           mine[x - 1][y + 1] +
+           mine[x][y - 1] +
+           mine[x][y + 1] +
+           mine[x + 1][y - 1] +
+           mine[x + 1][y] +
+           mine[x + 1][y + 1] - 8 * '0';
+}
+
+// 展开一片
+void spreadMine(char mine[ROWS][COLS], char show[ROWS][COLS], int x, int y)
+{
+    if (x < 1 || x > ROW || y < 1 || y > COL)
+    {
+        return;
+    }
+
+    book[x][y] = 1;
+
+    int count = get_mine_count(mine, x, y);
+
+    if (count > 0)
+    {
+        show[x][y] = count + '0';
+        return;
+    }
+
+    show[x][y] = ' ';
+
+    if (book[x - 1][y - 1] == 0)
+        spreadMine(mine, show, x - 1, y - 1);
+    if (book[x - 1][y] == 0)
+        spreadMine(mine, show, x - 1, y);
+    if (book[x - 1][y + 1] == 0)
+        spreadMine(mine, show, x - 1, y + 1);
+    if (book[x][y - 1] == 0)
+        spreadMine(mine, show, x, y - 1);
+    if (book[x][y + 1] == 0)
+        spreadMine(mine, show, x, y + 1);
+    if (book[x + 1][y - 1] == 0)
+        spreadMine(mine, show, x + 1, y - 1);
+    if (book[x + 1][y] == 0)
+        spreadMine(mine, show, x + 1, y);
+    if (book[x + 1][y + 1] == 0)
+        spreadMine(mine, show, x + 1, y + 1);
+}
+
+// 判断是否胜利
+bool isWin(char show[ROWS][COLS], int row, int col)
+{
+    int count = 0;
+    for (int i = 1; i <= row; i++)
+    {
+        for (int j = 1; j <= col; j++)
+        {
+            if (show[i][j] == '*')
+            {
+                count++;
+            }
+        }
+    }
+
+    if (count == EASY_COUNT)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 // 排查雷
@@ -88,6 +165,7 @@ void findMine(char mine[ROWS][COLS], char show[ROWS][COLS], int row, int col)
     int x = 0;
     int y = 0;
 
+    int win = 0; // 找到非雷的个数
     while (1)
     {
         printf("请输入要排查的坐标:>\n");
@@ -95,18 +173,43 @@ void findMine(char mine[ROWS][COLS], char show[ROWS][COLS], int row, int col)
 
         if (x >= 1 && x <= row && y >= 1 && y <= col)
         {
-            if (mine[x][y] == '1')
+            if (show[x][y] != '*')
             {
-                printf("很遗憾，你被炸死了\n");
-                displayBoard(mine, ROW, COL);
-                break;
+                printf("该坐标已被排查,不能重复排查\n");
             }
 
             else
             {
-                int count = get_mine_count(mine, x, y);
-                show[x][y] = count + '0';
-                displayBoard(show, ROW, COL);
+                if (mine[x][y] == '1')
+                {
+                    printf("很遗憾，你被炸死了\n");
+                    displayBoard(mine, ROW, COL);
+                    break;
+                }
+
+                else
+                {
+                    int count = get_mine_count(mine, x, y);
+
+                    if (count == 0)
+                    {
+                        show[x][y] = ' ';
+                        spreadMine(mine, show, x, y);
+                        displayBoard(show, ROW, COL);
+                    }
+
+                    else
+                    {
+                        show[x][y] = count + '0';
+                        displayBoard(show, ROW, COL);
+                    }
+
+                    if (isWin(show, ROW, COL))
+                    {
+                        printf("恭喜你,排雷成功\n");
+                        break;
+                    }
+                }
             }
         }
 
@@ -123,11 +226,13 @@ void game()
     char mine[ROWS][COLS] = {0}; // 存放布置好的雷的信息
     char show[ROWS][COLS] = {0}; // 存放排查出的雷的信息
 
+    memset(book, 0, sizeof(book));
+
     initBoard(mine, ROWS, COLS, '0'); // mine数组在没有布置雷时都是'0'，雷用'1'表示
     initBoard(show, ROWS, COLS, '*'); // show数组在没有排查雷时都是'*'
 
     setMine(mine, ROW, COL);
-    // displayBoard(mine, ROW, COL);
+    displayBoard(mine, ROW, COL);
     displayBoard(show, ROW, COL);
 
     findMine(mine, show, ROW, COL);

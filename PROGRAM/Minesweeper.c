@@ -10,7 +10,7 @@
 #define ROWS ROW + 2
 #define COLS COL + 2
 
-#define EASY_COUNT 5
+#define EASY_COUNT 10
 
 int book[ROWS][COLS]; // 标记数组
 

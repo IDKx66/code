@@ -3,6 +3,8 @@
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
+#include <stdbool.h>
+#include <windows.h>
 
 #define ROW 9
 #define COL 9
@@ -22,7 +24,7 @@ void displayBoard(char board[ROWS][COLS], int row, int col);                   /
 void setMine(char mine[ROWS][COLS], int row, int col);                         // 布置雷
 int get_mine_count(char mine[ROWS][COLS], int x, int y);                       // 获取周围雷的数量
 void spreadMine(char mine[ROWS][COLS], char show[ROWS][COLS], int x, int y);   // 展开一片
-void isWin(char show, int row, int col);                                       // 判断是否胜利
+bool isWin(char show[ROWS][COLS], int row, int col);                           // 判断是否胜利
 void findMine(char mine[ROWS][COLS], char show[ROWS][COLS], int row, int col); // 排查雷
 void game();                                                                   // 游戏主函数
 
@@ -240,6 +242,10 @@ void game()
 
 int main()
 {
+    // 设置控制台编码为UTF-8
+    SetConsoleOutputCP(65001);
+    SetConsoleCP(65001);
+
     srand((unsigned int)time(NULL)); // 设置随机数种子
 
     int input = 0;

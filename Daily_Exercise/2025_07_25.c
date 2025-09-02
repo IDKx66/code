@@ -589,7 +589,7 @@
 //     return 0;
 // }
 
-// 非递归与递归写求字符串长度
+// 1.非递归与递归写求字符串长度
 // int my_strlen(char *str)
 // {
 //     int count = 0;
@@ -601,6 +601,7 @@
 //     return count;
 // }
 
+// 2.递归与递归写求字符串长度
 // int my_strlen(char *str)
 // {
 //     if (*str != '\0')
@@ -613,9 +614,20 @@
 //     }
 // }
 
+// 3.指针相减求字符串长度
+// int my_strlen(char *str)
+// {
+//     char *start = str;
+//     while (*str != '\0')
+//     {
+//         str++;
+//     }
+//     return str - start;
+// }
+
 // int main()
 // {
-//     char arr[] = "abc d ][]";
+//     char arr[] = "abc d ][]"; // 9
 //     int len = my_strlen(arr);
 //     printf("%d\n", len);
 
@@ -1119,13 +1131,136 @@
 //     return 0;
 // }
 
-//算术转换
+// 算术转换
+//  int main()
+//  {
+//      int i = 10;
+//      i = i-- - --i * (i = -3) * i++ + ++i; //非法表达式
+//      printf("%d\n", i);
+//      return 0;
+//  }
+
+// 指针
+
+// 指针类型
+// int main()
+// {
+//     int a = 0x11223344;
+//     int *pa = &a;
+//     *pa = 0;
+
+//     char *pc = (char *)&a;
+//     *pc = 0;
+
+//     // 结论1：指针类型决定了指针在被解引用的时候访问几个字节
+//     return 0;
+// }
+
+// int main()
+// {
+//     int a = 0x64;
+//     // printf("%d\n", a); // 100
+
+//     int *pa = &a;
+//     char *pc = (char *)&a;
+
+//     printf("pa = %p\n", pa);
+//     printf("pa + 1 = %p\n", pa + 1);
+
+//     printf("pc = %p\n", pc);
+//     printf("pc + 1 = %p\n", pc + 1);
+//     // 结论2：指针的类型决定了指针向前或向后走一步有多大（距离）
+
+//     return 0;
+// }
+
+// int main()
+// {
+//     int a = 0;
+//     int *pi = &a;
+//     float *pf = (float*)&a;
+
+//     *pi = 100;
+//     printf("%d\n", a);
+
+//     *pf = 100.0;
+//     printf("%d\n", a);
+
+//     return 0;
+// }
+
+// 野指针
+// 概念：野指针就是指向的位置是不可知的
+
+// int main()
+// {
+//     int arr[10] = {0};
+//     int *p = arr;
+//     for(int i = 0; i <= 10; i++)
+//     {
+//         *p = i;
+//         p++;
+//     }
+//     for(int i = 0; i <= 15; i++)
+//     {
+//         printf("%d\n", arr[i]);
+//     }
+
+//     return 0;
+// }
+// int *test()
+// {
+//     int a = 10;
+//     return &a;
+// }
+
+// int main()
+// {
+//     int *p = test();
+//     printf("%d\n", *p);
+// }
+
+// 指针相减的结果是两个指针之间的元素个数
+
+// 二级指针
+
+// int main()
+// {
+//     int a = 10;
+//     int *pa = &a;
+//     int **ppa = &pa;
+
+//     return 0;
+// }
+
+// 指针数组
+// 存放指针的数组就是指针数组
 
 int main()
 {
-    int i = 10;
-    i = i-- - --i * (i = -3) * i++ + ++i; //非法表达式
-    printf("%d\n", i);
+    // int a = 10;
+    // int b = 20;
+    // int c = 30;
 
+    // int *parr[10] = {&a, &b, &c};
+    // for (int i = 0; i < 3; i++)
+    // {
+    //     printf("%d\n", *(parr[i]));
+    // }
+
+    int arr1[4] = {1, 2, 3, 4};
+    int arr2[4] = {2, 3, 4, 5};
+    int arr3[4] = {3, 4, 5, 6};
+    
+    int *parr[3] = {arr1, arr2, arr3};
+
+    for(int i = 0; i < 3; i++)
+    {
+        for(int j = 0; j < 4; j++)
+        {
+            printf("%d ", parr[i][j]);
+        }
+        printf("\n");
+    }
     return 0;
 }

@@ -1236,31 +1236,57 @@
 // 指针数组
 // 存放指针的数组就是指针数组
 
+// int main()
+// {
+//     // int a = 10;
+//     // int b = 20;
+//     // int c = 30;
+
+//     // int *parr[10] = {&a, &b, &c};
+//     // for (int i = 0; i < 3; i++)
+//     // {
+//     //     printf("%d\n", *(parr[i]));
+//     // }
+
+//     int arr1[4] = {1, 2, 3, 4};
+//     int arr2[4] = {2, 3, 4, 5};
+//     int arr3[4] = {3, 4, 5, 6};
+
+//     int *parr[3] = {arr1, arr2, arr3};
+
+//     for(int i = 0; i < 3; i++)
+//     {
+//         for(int j = 0; j < 4; j++)
+//         {
+//             printf("%d ", parr[i][j]);
+//         }
+//         printf("\n");
+//     }
+//     return 0;
+// }
+
+// 结构体
+struct Peo
+{
+    char name[20];
+    char tele[12];
+    char sex[5];
+    int high;
+} p3, p4; // 创建了两个结构体变量p4和p4
+
+struct St
+{
+    struct Peo;
+    int num;
+    float f;
+};
+
 int main()
 {
-    // int a = 10;
-    // int b = 20;
-    // int c = 30;
+    struct Peo p1 = {"张三", "123456789", "男", 175};
+    printf("name = %s, tele = %s, sex = %s, high = %d\n", p1.name, p1.tele, p1.sex, p1.high);
+    strcpy(p1.name, "李四");
+    printf("name = %s, tele = %s, sex = %s, high = %d\n", p1.name, p1.tele, p1.sex, p1.high);
 
-    // int *parr[10] = {&a, &b, &c};
-    // for (int i = 0; i < 3; i++)
-    // {
-    //     printf("%d\n", *(parr[i]));
-    // }
-
-    int arr1[4] = {1, 2, 3, 4};
-    int arr2[4] = {2, 3, 4, 5};
-    int arr3[4] = {3, 4, 5, 6};
-    
-    int *parr[3] = {arr1, arr2, arr3};
-
-    for(int i = 0; i < 3; i++)
-    {
-        for(int j = 0; j < 4; j++)
-        {
-            printf("%d ", parr[i][j]);
-        }
-        printf("\n");
-    }
     return 0;
 }

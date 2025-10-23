@@ -1,0 +1,25 @@
+// int Add(int x, int y)
+// {
+//     return x + y;
+// }
+// int Add(double x,double y)
+// {
+//     return static_cast<int>(x + y);
+// }
+
+// template<typename t>
+// int Add(t x, t y)
+// {
+//     return static_cast<int>(x + y);
+// }
+#include <string>
+#include <memory>
+void test();
+void test1()
+{
+    test();
+}
+void test()
+{
+    test1();
+}

@@ -1,0 +1,42 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "cppbuild",
+      "label": "C/C++: g++.exe 生成活动文件",
+      "command": "C:\\msys64\\ucrt64\\bin\\g++.exe",
+      "args": [
+        "-Wall", // 开启所有警告
+        "-Wextra", // 开启额外警告（新增）
+        "-fdiagnostics-color=always", // 彩色诊断信息
+        "-std=c++26", // 指定 C++ 标准（注意：需确认 GCC 对 C++26 的支持程度）
+        "-march=native", // 针对本地 CPU 架构优化（新增）
+        "-g3", // 生成更详细的调试信息（替换原 "-g"）
+        "${file}", // 当前编译的源文件
+        "-O2",
+        "-o", // 输出文件指定选项
+        "${fileDirname}\\output\\${fileBasenameNoExtension}.exe", // 输出到 output 子目录
+        "-ljsoncpp", // 链接 jsoncpp 库（新增）
+        "-lpdh", // 链接 pdh 库（新增）
+        "-lws2_32", // 链接 ws2_32 库（Windows 网络相关）
+        "-lmswsock", // 链接 mswsock 库（Windows 网络相关）
+        "-lcrypto", // 链接 crypto 库（OpenSSL 相关）
+        "-lcryptopp", // 链接 cryptopp 库（Crypto++ 相关）
+        "-lboost_json-mt", // 链接 boost_json-mt 库（Boost.JSON 多线程版）
+        "-lssl", // 链接 ssl 库（OpenSSL 相关）
+        "-lcrypto" // 链接 crypto 库（OpenSSL 相关）
+      ],
+      "options": {
+        "cwd": "${fileDirname}" // 编译工作目录为当前文件所在目录
+      },
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "detail": "调试器生成的任务。"
+    }
+  ]
+}

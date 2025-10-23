@@ -1,23 +1,54 @@
+// #include <iostream>
+// using namespace  std;
+
+// namespace A
+// {
+//     int a = 10;
+//     int b = 20;
+//     int c = 30;
+// }
+
+// // 全缺省
+// // void fun(int a = 10, int b = 20, int c = 30)
+// // {
+// //     cout << a << " " << b << " " << c << endl;
+// // }
+
+// // 半缺省（从右往左缺省）
+// void fun(int a, int b = 20, int c = 30)
+// {
+//     cout << a << " " << b << " " << c << endl;
+// }
+// int main()
+// {
+//     // fun();
+//     fun(1);
+//     fun(1, 2);
+//     fun(1, 2, 3);
+
+//     return 0;
+// }
+// #include <iostream>
+// #include "./add"
+// int main()
+// {
+//     std::cout << Add(10, 20) << std::endl;
+//     int a = Add(18, 29);
+//     std::cout << Add(10.0, 20.0) << std::endl;
+//     // std::cout << Add('a','b') << std::endl;
+//     // std::cout << Add(10, 20) << std::endl;//     std::cout << Add(10.0, 20.0) << std::endl;
+//     return 0;
+// }
 #include <iostream>
-#include <unordered_map>
-using namespace  std;
-void test1()
+void Test(int a = 2, int b = 9)
 {
-    unordered_map<string,string> hash_table;
-    hash_table.insert(make_pair(string("插入"),string("insert")));
-    hash_table.insert(make_pair(string("推"),string("push")));
-    hash_table.insert(make_pair(string("删除"),string("delete")));
-    //遍历
-    for(auto str : hash_table)
-    {   //语法糖for
-        cout << str.first  << " " << str.second << " ";
-    }    
-    cout << endl;
-    // cout << (hash_table.find(string("插入")) != hash_table.end()) << endl;
-    cout << hash_table[string("插入")] << std::endl;
+    std::cout << a + b;
 }
+#include "./add"
 int main()
 {
-    test1();
+    // test();
+
+    Test();
     return 0;
 }

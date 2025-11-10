@@ -69,11 +69,6 @@ void vector<T>::pop_back()
     }
 }
 
-int Add(int left, int right)
-{
-    return left + right;
-}
-
 template <class T>
 T Add(T left, T right)
 {
@@ -82,22 +77,22 @@ T Add(T left, T right)
 
 int main()
 {
-    // vector<int> v;
-    // v.push_back(1);
-    // v.push_back(2);
-    // v.push_back(3);
+    vector<int> v;
+    v.push_back(1);
+    v.push_back(2);
+    v.push_back(3);
 
-    // for(size_t i = 0; i < v.size(); i++)
-    // {
-    //     v[i] *= 2;
-    // }
+    for (size_t i = 0; i < v.size(); i++)
+    {
+        v[i] *= 2;
+    }
 
-    // for(size_t i = 0; i < v.size(); i++)
-    // {
-    //     std::cout << v[i] << " ";
-    // }
+    for (size_t i = 0; i < v.size(); i++)
+    {
+        std::cout << v[i] << " ";
+    }
 
-    Add(1, 2);
-    Add<int>(1, 2);
+    Add(1, 2);      // 隐式实例化
+    Add<int>(1, 2); // 显式实例化
     return 0;
 }
